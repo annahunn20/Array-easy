@@ -1,0 +1,77 @@
+import java.util.*;
+public class GFG {
+    // Function to find the index of first repeating element in an array
+    public static int firstRepeatingElement(int[] arr, int n) {
+        // Nested loop to check for repeating elements
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                // If a repeating element is found, return its index
+                if (arr[i] == arr[j]) {
+                    return i;
+                }
+            }
+        }
+        // If no repeating element is found, return -1
+        return -1;
+    }
+    public static void main(String[] args) {
+        // Initializing an array and its size
+        int[] arr = { 10, 5, 3, 4, 3, 5, 6 };
+        int n = arr.length;
+        // Finding the index of first repeating element
+        int index = firstRepeatingElement(arr, n);
+ 
+        // Checking if any repeating element is found or not
+        if (index == -1) {
+            System.out.println("No repeating element found!");
+        }
+        else {
+            // Printing the first repeating element and its index
+            System.out.println("First repeating element is " + arr[index]);
+        }
+    }
+}
+Time Complexity: O(N^2)
+Auxiliary Space: O(1)
+
+Find the first repeating element in an array of integers using Hashset
+import java.util.*;
+ 
+class Main {
+    // This function prints the first repeating element in
+    // arr[]
+    static void printFirstRepeating(int arr[])
+    {
+        // Initialize index of first repeating element
+        int min = -1;
+ 
+        // Creates an empty hashset
+        HashSet<Integer> set = new HashSet<>();
+
+        // Traverse the input array from right to left
+        for (int i = arr.length - 1; i >= 0; i--) {
+            // If element is already in hash set, update min
+            if (set.contains(arr[i]))
+                min = i;
+ 
+            else // Else add element to hash set
+                set.add(arr[i]);
+        }
+        // Print the result
+        if (min != -1)
+            System.out.println(
+                "The first repeating element is "
+                + arr[min]);
+        else
+            System.out.println(
+                "There are no repeating elements");
+    }
+    public static void main(String[] args)
+        throws java.lang.Exception
+    {
+        int arr[] = { 10, 5, 3, 4, 3, 5, 6 };
+        printFirstRepeating(arr);
+    }
+}
+Time Complexity: O(n).
+Auxiliary Space: O(n).
