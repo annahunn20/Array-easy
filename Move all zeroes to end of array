@@ -1,0 +1,63 @@
+import java.io.*; 
+class PushZero 
+{ 
+    static void pushZerosToEnd(int arr[], int n) 
+    { 
+        int count = 0;  // Count of non-zero elements 
+        // Traverse the array. If element encountered is 
+        // non-zero, then replace the element at index 'count' 
+        // with this element 
+        for (int i = 0; i < n; i++) 
+            if (arr[i] != 0) 
+                arr[count++] = arr[i]; // here count is 
+                                       // incremented   
+        // Now all non-zero elements have been shifted to 
+        // front and 'count' is set as index of first 0. 
+        // Make all elements 0 from count to end. 
+        while (count < n) 
+            arr[count++] = 0; 
+    } 
+    public static void main (String[] args) 
+    { 
+        int arr[] = {1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0, 9}; 
+        int n = arr.length; 
+        pushZerosToEnd(arr, n); 
+        System.out.println("Array after pushing zeros to the back: "); 
+        for (int i=0; i<n; i++) 
+            System.out.print(arr[i]+" "); 
+    } 
+} 
+Time Complexity: O(n) where n is the size of elements of the input array.
+Auxiliary Space: O(1)
+
+Method 2: Partitioning the array
+Approach: The approach is pretty simple. We will use 0 as a pivot element and whenever we see a non zero element we will swap it with the pivot element. 
+So all the non zero element will come at the beginning.
+
+import java.util.*; 
+public class Main { 
+    public static void main(String[] args) 
+    { 
+        int[] A = { 5, 6, 0, 4, 6, 0, 9, 0, 8 }; 
+        int n = A.length; 
+        int j = 0; 
+        for (int i = 0; i < n; i++) { 
+            if (A[i] != 0) { 
+                //   Swap - A[j] , A[i] 
+                swap(A, j, i); // Partitioning the array 
+                j++; 
+            } 
+        } 
+        for (int i = 0; i < n; i++) { 
+            System.out.print(A[i] + " "); // Print the array 
+        } 
+    } 
+    public static void swap(int[] A, int a, int b) 
+    { 
+        int temp = A[a]; 
+        A[a] = A[b]; 
+        A[b] = temp; 
+    } 
+}
+Time Complexity: O(N), where N is the size of elements of the input array.
+Auxiliary Space: O(1)
