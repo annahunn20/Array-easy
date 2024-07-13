@@ -1,0 +1,115 @@
+Two elements whose sum is closest to zero using Nested Loops:brute-force method
+import java.util.Arrays;
+
+public class Main {
+    // Function to find the two elements whose sum is closest to zero
+    static int minAbsSumPair(int[] arr) {
+        int n = arr.length;
+
+        // Sort the array to simplify the process
+        Arrays.sort(arr);
+
+        // Initialize pointers and minimum sum
+        int l = 0, r = n - 1;
+        int min_sum = Integer.MAX_VALUE;
+        int min_l = 0, min_r = 0;
+
+        // Loop through the array
+        while (l < r) {
+            // Calculate the current sum
+            int sum = arr[l] + arr[r];
+
+            // If the absolute value of the current sum is
+            // less than the minimum sum found so far
+            if (Math.abs(sum) < Math.abs(min_sum)) {
+                // Update the minimum sum and indices
+                min_sum = sum;
+                min_l = l;
+                min_r = r;
+            }
+
+            // Move pointers based on the sum
+            if (sum < 0) {
+                l++;
+            } else if (sum > 0) {
+                r--;
+            } else {
+                break; // Found a pair with sum zero
+            }
+        }
+
+        // Return the sum of the two elements with the minimum sum
+        return arr[min_l] + arr[min_r];
+    }
+
+    public static void main(String[] args) {
+        // Array of elements
+        int[] arr = { 1, 60, -10, 70, -80, 85 };
+
+        // Find the two elements with the minimum sum
+        int result = minAbsSumPair(arr);
+
+        // Print the result
+        System.out.println(result);
+    }
+}
+Time complexity: O(n^2)
+Auxiliary Space: O(1)
+
+Two elements whose sum is closest to zero using Sorting:
+import java.util.Arrays;
+public class ClosestToZero {
+    public static int closestToZero(int[] arr)
+    {
+        // Sorting the array in ascending order
+        Arrays.sort(arr);
+
+        int i = 0, j = arr.length - 1;
+
+        // Initializing sum with the first and last elements
+        int sum = arr[i] + arr[j];
+
+        // Initializing the result with the absolute value
+        // of the initial sum
+        int diff = Math.abs(sum);
+        while (i < j) {
+            // If we have zero sum, there's no result
+            // better. Hence, we return 0.
+            if (arr[i] + arr[j] == 0)
+                return 0;
+
+            // If we get a better result, we update the
+            // difference
+            if (Math.abs(arr[i] + arr[j])
+                < Math.abs(diff)) {
+                diff = (arr[i] + arr[j]);
+                sum = arr[i] + arr[j];
+            }
+            else if (Math.abs(arr[i] + arr[j])
+                     == Math.abs(diff)) {
+                // If there are multiple pairs with the same
+                // minimum absolute difference, return the
+                // pair with the larger sum
+                sum = Math.max(sum, arr[i] + arr[j]);
+            }
+
+            // If the current sum is greater than zero, we
+            // search for a smaller sum
+            if (arr[i] + arr[j] > 0)
+                j--;
+            // Else, we search for a larger sum
+            else
+                i++;
+        }
+        return sum;
+    }
+    public static void main(String[] args)
+    {
+        int[] arr = { 1, 60, -10, 70, -80, 85 };
+        int result = closestToZero(arr);
+        System.out.println(result);
+    }
+}
+Time Complexity: O(nlogn)
+Auxiliary Space: O(1)
+
