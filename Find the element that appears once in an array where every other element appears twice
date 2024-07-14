@@ -1,0 +1,68 @@
+import java.io.*; 
+class GFG { 
+  // Function to find the 
+  static int findSingle(int A[], int ar_size) 
+  { 
+  
+    // Iterate over every element 
+    for (int i = 0; i < ar_size; i++) { 
+  
+      // Initialize count to 0 
+      int count = 0; 
+  
+      for (int j = 0; j < ar_size; j++) { 
+  
+        // Count the frequency 
+        // of the element 
+        if (A[i] == A[j]) { 
+          count++; 
+        } 
+      } 
+  
+      // if the frequency of the 
+      // element is one 
+      if (count == 1) { 
+        return A[i]; 
+      } 
+    } 
+  
+    // if no element exist at most once 
+    return -1; 
+  } 
+  
+  public static void main (String[] args) { 
+    int ar[] = { 2, 3, 5, 4, 5, 3, 4 }; 
+    int n = ar.length; 
+  
+    // Function call 
+    System.out.println("Element occurring once is " + findSingle(ar, n)); 
+  } 
+} 
+Time complexity of this solution is O(n^2)
+Auxiliary Space: O(1) as constant space is used.
+
+using xor 
+import java.io.*; 
+class MaxSum 
+{ 
+    // Return the maximum Sum of difference 
+    // between consecutive elements. 
+    static int findSingle(int ar[], int ar_size) 
+    { 
+        // Do XOR of all elements and return 
+        int res = ar[0]; 
+        for (int i = 1; i < ar_size; i++) 
+            res = res ^ ar[i]; 
+      
+        return res; 
+    } 
+    public static void main (String[] args) 
+    { 
+        int ar[] = {2, 3, 5, 4, 5, 3, 4}; 
+        int n = ar.length; 
+        System.out.println("Element occurring once is " + findSingle(ar, n) + " ");
+                             
+    } 
+}
+Time Complexity: O(n)
+Auxiliary Space: O(1)
