@@ -1,0 +1,63 @@
+import java.util.Arrays;
+public class Main {
+    public static void main(String[] args)
+    {
+        // Input array containing elements from 1 to n
+        int[] arr = { 3, 1, 4, 2, 5 };
+        Arrays.sort(arr);
+        System.out.print("Sorted array is : ");
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+}
+Time Complexity: O(n log n)
+Auxiliary Space: O(1)
+
+Efficient Approach (Using Cyclic Sort):
+import java.io.*;
+import java.util.Arrays;
+class GFG {
+
+      // Driver Code
+    public static void main(String[] args)
+    {
+        int[] arr = { 3, 2, 5, 6, 1, 4 };
+        
+          // Function call
+          sort(arr);
+
+        // Printing the answer
+        System.out.println(Arrays.toString(arr));
+    }
+    static void sort(int[] arr)
+    {
+        int i = 0;
+        while (i < arr.length) {
+
+            // Finding the correct index
+            int correct = arr[i] - 1;
+
+            // Element index and value not match
+            // then swapping
+            if (arr[correct] != arr[i]) {
+
+                // Calling swap function
+                swap(arr, i, correct);
+            }
+            else {
+                i++;
+            }
+        }
+    }
+
+    // Function to swap values
+    static void swap(int[] arr, int first, int second)
+    {
+        int temp = arr[first];
+        arr[first] = arr[second];
+        arr[second] = temp;
+    }
+}
+Time Complexity: O(n)
+Auxiliary Space: O(1)
