@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void insertValue(int arr[], int size, int value, int position) {
+    int i, j;
+    // Shift elements to make space for the new value
+    for (i = size - 1; i >= position; i--) {
+        arr[i + value] = arr[i];
+    }
+
+    // Insert the new value
+    for (j = 0; j < value; j++) {
+        arr[position + j] = value;
+    }
+}
+
+int main() {
+    int size = 10;
+    int arr[size];
+    for (int i = 0; i < size; i++) {
+        arr[i] = i + 1;
+    }
+
+    insertValue(arr, size, 3, 5);
+
+    for (int i = 0; i < size + 3; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
