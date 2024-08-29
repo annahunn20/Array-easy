@@ -1,0 +1,20 @@
+#include <stdio.h>
+#define SIZE 6
+int sumOddOccurring(int arr[], int size) {
+    int sum = 0;
+    int count[SIZE] = {0}; // Assuming all elements are in the range 0 to SIZE-1
+    for (int i = 0; i < size; i++) {
+        count[arr[i]]++;
+    }
+    for (int i = 0; i < SIZE; i++) {
+        if (count[i] % 2 != 0) {
+            sum += i * count[i];
+        }
+    }
+    return sum;
+}
+int main() {
+    int arr[SIZE] = {1, 2, 3, 2, 1, 1};
+    printf("Sum of odd-occurring elements: %d\n", sumOddOccurring(arr, SIZE));
+    return 0;
+}
