@@ -1,0 +1,64 @@
+#include <stdio.h>
+
+void swapArrays(int a[], int b[], int sizeA, int sizeB) {
+    int sumA = 0, sumB = 0;
+    int diff, temp;
+
+    // Calculate the sum of both arrays
+    for (int i = 0; i < sizeA; i++) {
+        sumA += a[i];
+    }
+    for (int i = 0; i < sizeB; i++) {
+        sumB += b[i];
+    }
+
+    diff = sumA - sumB;
+
+    // Check if the difference is odd; swapping won't work in that case
+    if (diff % 2 != 0) {
+        printf("Swapping not possible\n");
+        return;
+    }
+
+    diff /= 2;
+
+    // Find the pair to swap
+    for (int i = 0; i < sizeA; i++) {
+        for (int j = 0; j < sizeB; j++) {
+            if (a[i] - b[j] == diff) {
+                // Swap elements
+                temp = a[i];
+                a[i] = b[j];
+                b[j] = temp;
+
+                // Print arrays after swap
+                printf("Array A: ");
+                for (int k = 0; k < sizeA; k++) {
+                    printf("%d ", a[k]);
+                }
+                printf("\n");
+
+                printf("Array B: ");
+                for (int k = 0; k < sizeB; k++) {
+                    printf("%d ", b[k]);
+                }
+                printf("\n");
+
+                return;
+            }
+        }
+    }
+
+    printf("No suitable pair found for swapping\n");
+}
+
+int main() {
+    int a[] = {1, 2, 3, 4};
+    int b[] = {5, 6, 7};
+    int sizeA = sizeof(a) / sizeof(a[0]);
+    int sizeB = sizeof(b) / sizeof(b[0]);
+
+    swapArrays(a, b, sizeA, sizeB);
+
+    return 0;
+}
