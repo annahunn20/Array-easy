@@ -1,0 +1,50 @@
+#include <stdio.h>
+
+void reverseArray(int arr[], int start, int end) {
+    int temp;
+    while (start < end) {
+        temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+    }
+}
+
+void reverseSequences(int arr[], int size) {
+    int start = 0, end;
+    
+    while (start < size) {
+        // Find end of current increasing or decreasing sequence
+        end = start;
+        if (arr[end] <= arr[end + 1]) { // Increasing sequence
+            while (end < size - 1 && arr[end] <= arr[end + 1]) {
+                end++;
+            }
+        } else { // Decreasing sequence
+            while (end < size - 1 && arr[end] >= arr[end + 1]) {
+                end++;
+            }
+        }
+
+        // Reverse the identified sequence
+        reverseArray(arr, start, end);
+
+        // Move to the next sequence
+        start = end + 1;
+    }
+}
+
+int main() {
+    int arr[] = {1, 2, 3, 7, 6, 5, 10, 11, 12, 8, 4};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    reverseSequences(arr, size);
+
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
