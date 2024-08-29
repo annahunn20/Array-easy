@@ -1,0 +1,39 @@
+#include <stdio.h>
+#define M 4
+#define N 4
+
+void replaceZeros(int matrix[M][N]) {
+    int i, j;
+
+    for (i = 1; i < M - 1; i++) {
+        for (j = 1; j < N - 1; j++) {
+            if (matrix[i][j] == 0 &&
+                matrix[i-1][j] == 1 &&
+                matrix[i+1][j] == 1 &&
+                matrix[i][j-1] == 1 &&
+                matrix[i][j+1] == 1) {
+                matrix[i][j] = 1;
+            }
+        }
+    }
+}
+
+int main() {
+    int matrix[M][N] = {
+        {1, 1, 1, 1},
+        {1, 0, 1, 1},
+        {1, 1, 1, 1},
+        {1, 1, 1, 1}
+    };
+
+    replaceZeros(matrix);
+
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
