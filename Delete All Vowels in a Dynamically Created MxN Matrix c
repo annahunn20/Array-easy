@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define M 3
+#define N 4
+
+void deleteVowels(char **matrix) {
+    int i, j, k;
+    char vowels[] = "AEIOU";
+
+    for (i = 0; i < M; i++) {
+        int writeIndex = 0;
+        for (j = 0; j < N; j++) {
+            if (!strchr(vowels, matrix[i][j])) {
+                matrix[i][writeIndex++] = matrix[i][j];
+            }
+        }
+        for (k = writeIndex; k < N - 1; k++) {
+            matrix[i][k] = 'X';
+        }
+    }
+}
+
+int main() {
+    char *matrix[M];
+    for (int i = 0; i < M; i++) {
+        matrix[i] = (char *)malloc(N * sizeof(char));
+        for (int j = 0; j < N; j++) {
+            matrix[i][j] = 'A' + (j % 26);
+        }
+    }
+
+    deleteVowels(matrix);
+
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            printf("%c ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+    for (int i = 0; i < M; i++) {
+        free(matrix[i]);
+    }
+
+    return 0;
+}
